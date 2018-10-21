@@ -36,9 +36,8 @@ $(document).ready(function () {
         question: "What is the air speed velocity of a laden swallow?",
         answers: ["About 24 miles per hour", "African or European?", "Laden swallows can't fly.", "About 24 kilometers per hour."],
         correctAnswer: "African or European?"
-    },
+    }
     ];
-
 
     let timer;
     let countStartNum = 30;
@@ -155,6 +154,8 @@ $(document).ready(function () {
             }
         },
 
+    // Reset function.
+
         reset: function () {
             this.currentQuestion = 0;
             this.counter = countStartNum;
@@ -186,3 +187,11 @@ var themeSong = new Audio("./assets/music/themesong.mp3");
 document.getElementById("start").addEventListener("click", e => themeSong.play());
 document.getElementById("start-music").addEventListener("click", e => themeSong.play(), themeSong.volume = 0.2);
 document.getElementById("stop-music").addEventListener("click", e => themeSong.pause());
+
+// HTML 5 compatible looping of the theme song.
+
+themeSong.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+themeSong.play();
