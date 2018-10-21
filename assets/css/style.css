@@ -14,9 +14,9 @@ body {
   width: 960px;
   height: auto;
   box-sizing: border-box;
-  margin: 2.5% auto;
+  margin: 3.5% auto;
   background-color: #F2F3F4;
-  opacity: .75;
+  opacity: .95;
   padding-bottom: 30px;
   border-radius: 10px;
 }
@@ -46,13 +46,13 @@ h1 {
   font-family: 'Charmonman', cursive;
   font-size: 6.5em;
   font-weight: bold;
-  color: blue;
+  color: palevioletred;
 }
 
 h2 {
   margin-bottom: 25px;
   font-size: 35px;
-  color: purple;
+  color: black;
 }
 
 h3 {
@@ -62,11 +62,11 @@ h3 {
 
 #start {
   margin-top: 10%;
-  background: pink;
-  border: 2px solid blue;
+  background: lightblue;
+  border: 2px solid pink;
 }
 
 button:hover {
-  background: pink;
-  border: 2px solid blue;
+  background: lightblue;
+  border: 2px solid pink;
 }

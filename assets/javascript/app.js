@@ -24,22 +24,28 @@ $(document).ready(function () {
     },
     {
         question: "How many strings does a cello have?",
-        answers: ["Four", "Five", "Six", "Eight"],
+        answers: ["Three", "Four", "Six", "Eight"],
         correctAnswer: "Four"
     },
     {
         question: "What is the country of Brazil's official language?",
-        answers: ["Spanish", "French", "English", "Portuquese"],
-        correctAnswer: "Portuquese"
-    }];
+        answers: ["Spanish", "French", "English", "Portuguese"],
+        correctAnswer: "Portuguese"
+    },
+    {
+        question: "What is the air speed velocity of a laden swallow?",
+        answers: ["About 24 miles per hour", "African or European?", "Laden swallows can't fly.", "About 24 kilometers per hour."],
+        correctAnswer: "African or European?"
+    },
+    ];
 
-    // variables to hold our set interval and counter
+
     let timer;
     let countStartNum = 30;
 
     var viewPort = $("#quiz-area");
 
-    // creating the game object to hold the functions and variables to the game
+
     var game = {
         questions: questions,
         currentQuestion: 0,
@@ -47,13 +53,20 @@ $(document).ready(function () {
         correct: 0,
         incorrect: 0,
 
-        countdown: function () {
-            game.counter--;
+        // This section holds all the main game functions.
+
+        results: function () {
+
+            clearInterval(timer);
+
+            viewPort.html("<h2>Quiz Complete, here is how you did!</h2>");
+
             $("#counterNum").text(game.counter);
-            if (game.counter === 0) {
-                console.log("TIME UP");
-                game.timeUp();
-            }
+
+            viewPort.append("<h3>Correct Answers: " + game.correct + "</h3>");
+            viewPort.append("<h3>Incorrect Answers: " + game.incorrect + "</h3>");
+            viewPort.append("<h3>Unanswered: " + (questions.length - (game.incorrect + game.correct)) + "</h3>");
+            viewPort.append("<br><button id='start-over'>Start Over?</button>");
         },
 
         loadQuestion: function () {
@@ -89,20 +102,6 @@ $(document).ready(function () {
             else {
                 setTimeout(game.nextQuestion, 3 * 1000);
             }
-        },
-
-        results: function () {
-
-            clearInterval(timer);
-
-            viewPort.html("<h2>Quiz Complete, here is how you did!</h2>");
-
-            $("#counterNum").text(game.counter);
-
-            viewPort.append("<h3>Correct Answers: " + game.correct + "</h3>");
-            viewPort.append("<h3>Incorrect Answers: " + game.incorrect + "</h3>");
-            viewPort.append("<h3>Unanswered: " + (questions.length - (game.incorrect + game.correct)) + "</h3>");
-            viewPort.append("<br><button id='start-over'>Start Over?</button>");
         },
 
         clicked: function (e) {
@@ -148,6 +147,14 @@ $(document).ready(function () {
             }
         },
 
+        countdown: function () {
+            game.counter--;
+            $("#counterNum").text(game.counter);
+            if (game.counter === 0) {
+                game.timeUp();
+            }
+        },
+
         reset: function () {
             this.currentQuestion = 0;
             this.counter = countStartNum;
@@ -157,7 +164,7 @@ $(document).ready(function () {
         }
     };
 
-    // CLICK EVENTS
+    // On click functions.
 
     $(document).on("click", "#start-over", function () {
         game.reset();
@@ -173,6 +180,9 @@ $(document).ready(function () {
     });
 });
 
+// Music.
+
 var themeSong = new Audio("./assets/music/themesong.mp3");
+document.getElementById("start").addEventListener("click", e => themeSong.play());
 document.getElementById("start-music").addEventListener("click", e => themeSong.play(), themeSong.volume = 0.2);
 document.getElementById("stop-music").addEventListener("click", e => themeSong.pause());
